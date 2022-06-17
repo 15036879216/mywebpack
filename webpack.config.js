@@ -25,7 +25,7 @@ module.exports={
         open:true,
         port:8085
     },
-    //打包CSS
+    //打包CSS Less 
     module:{
         rules:[
             //打包CSS
@@ -33,7 +33,14 @@ module.exports={
                 test:/\.css/i,
                 //解析规则 从后向前  先用css-loader，再用style-loader
                 use:["style-loader","css-loader"]
-            }
+            },
+            //less
+            {
+                test:/\.less$/i,
+                use:["style-loader","css-loader","less-loader"]
+            },
+
+
         ]
     }
 }
