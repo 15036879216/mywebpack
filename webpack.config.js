@@ -20,8 +20,21 @@ module.exports={
             template:join(__dirname,'public/index.html')
         })
     ],
+    //服务器
     devServer:{
-        open:true
+        open:true,
+        port:8085
+    },
+    //打包CSS
+    module:{
+        rules:[
+            //打包CSS
+            {
+                test:/\.css/i,
+                //解析规则 从后向前  先用css-loader，再用style-loader
+                use:["style-loader","css-loader"]
+            }
+        ]
     }
 }
 
