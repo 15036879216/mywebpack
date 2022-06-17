@@ -3,9 +3,12 @@ import { myfoot } from "./MyFoot.js"
 myhead()
 myfoot()
 
-
+import MyApp from './app.vue'
+MyApp()
 import gifSrc from './assets/1.gif'
 import pngSrc from './assets/logo_small.png'
+
+
 
 const gif=document.createElement('img')
 const png=document.createElement('img')

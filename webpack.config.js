@@ -1,4 +1,6 @@
 const {join} =require('path')
+// webpack.config.js
+const { VueLoaderPlugin } = require('vue-loader')
 // 引入自动生成 html 的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports={
@@ -16,6 +18,8 @@ module.exports={
     },
     //自动生成html
     plugins: [
+        // 请确保引入这个插件！
+        new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             template:join(__dirname,'public/index.html')
         })
@@ -23,11 +27,15 @@ module.exports={
     //服务器
     devServer:{
         open:true,
-        port:8085
+        port:30000
     },
     //打包CSS Less 
     module:{
         rules:[
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+              },
             //打包CSS
             {
                 test:/\.css/i,
@@ -47,6 +55,17 @@ module.exports={
                     filename:'images/[hash:6][ext]'
                 }
             },
+            {
+                test: /\.(png|jpg|gif|jpeg)$/i,
+                //解析规则 从后向前  先用css-loader，再用style-loader
+                type:"asset",
+                parser:{
+                    dataUrlCondition:{
+                        maxSize:2*1024
+                    }
+                }
+            },
+            
             { // webpack5默认内部不认识这些文件, 所以当做静态资源直接输出即可
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
                 type: 'asset/resource',
@@ -59,5 +78,10 @@ module.exports={
         ]
     }
 }
+
+
+
+
+
 
 
