@@ -7,7 +7,6 @@ module.exports={
     //出口
     output:{
         path:join(__dirname,'lib'),
-
         filename:'index.js',
         //清除之前的打包
         clean:true
